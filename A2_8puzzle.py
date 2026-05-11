@@ -4,7 +4,13 @@ goal = [
     [4, 5, 6],
     [7, 8, 0]
 ]
-
+# Possible moves
+directions = [
+    (-1, 0),  # UP
+    (1, 0),   # DOWN
+    (0, -1),  # LEFT
+    (0, 1)    # RIGHT
+]
 
 # Function to calculate heuristic
 # Counts misplaced tiles
@@ -51,20 +57,10 @@ def a_star(start):
 
     while heuristic(current) != 0:
 
-        
-
         x, y = find_blank(current)
 
         best_state = None
         best_h = 999
-
-        # Possible moves
-        directions = [
-            (-1, 0),  # UP
-            (1, 0),   # DOWN
-            (0, -1),  # LEFT
-            (0, 1)    # RIGHT
-        ]
 
         # Try all moves
         for dx, dy in directions:
@@ -79,8 +75,7 @@ def a_star(start):
                 new_state = [row[:] for row in current]
 
                 # Swap blank with neighbor
-                new_state[x][y], new_state[nx][ny] = \
-                    new_state[nx][ny], new_state[x][y]
+                new_state[x][y], new_state[nx][ny] = new_state[nx][ny], new_state[x][y]
 
                 h = heuristic(new_state)
 
